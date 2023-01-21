@@ -7,8 +7,11 @@ export default function App() {
     return setChatlog(chatlog);
   }
 
+  // breaks for any new line and colorizes the chat
   function formatChatlog(chatlog: string) {
+    // string return after new line inside a map
     return chatlog.split('\n').map(str => {
+      // switch case where if char = true we colorize
       switch (str) {
         case str.startsWith('*') ? str : '':
           return <div className="outputChatlog me">{str}</div>;
