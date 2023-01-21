@@ -8,9 +8,15 @@ export default function App() {
   }
 
   function formatChatlog(chatlog: string) {
-    return chatlog
-      .split('\n')
-      .map(str => <div className="outputChatlog">{str}</div>);
+    return chatlog.split('\n').map(str => {
+      switch (str) {
+        case str.startsWith('*') ? str : '':
+          return <div className="outputChatlog me">{str}</div>;
+
+        default:
+          return <div className="outputChatlog">{str}</div>;
+      }
+    });
   }
 
   return (
