@@ -13,9 +13,11 @@ export default function App() {
     return chatlog.split('\n').map(str => {
       // switch case where if char = true we colorize
       switch (str) {
+        // /me
         case str.startsWith('*') ? str : '':
           return <div className="outputChatlog me">{str}</div>;
 
+        // default message in chat
         default:
           return <div className="outputChatlog">{str}</div>;
       }
