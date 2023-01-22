@@ -21,3 +21,31 @@ body {
 .me {
   color: #c2a2da;
 }
+
+.low {
+  color: #bbb;
+}
+
+.whisper {
+  color: #eda841;
+}
+
+.atc {
+  color: #ec3c92;
+}
+
+.radio {
+  color: #ffec8b;
+}
+
+.dep {
+  color: #e3e117;
+}
+
+.money {
+  color: #008000;
+}
+
+.give {
+  color: #56d64b;
+}
