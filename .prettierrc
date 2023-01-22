@@ -1,11 +1,22 @@
 {
-  "arrowParens": "avoid",
-  "bracketSpacing": false,
   "printWidth": 80,
-  "proseWrap": "always",
-  "semi": true,
-  "singleQuote": true,
   "tabWidth": 2,
-  "trailingComma": "all",
-  "useTabs": false
+  "trailingComma": "none",
+  "semi": true,
+  "htmlWhitespaceSensitivity": "css",
+  "quoteProps": "as-needed",
+  "overrides": [
+    {
+      "files": "*.css",
+      "options": {
+        "parser": "css"
+      }
+    },
+    {
+      "files": "*.scss",
+      "options": {
+        "parser": "scss"
+      }
+    }
+  ]
 }
