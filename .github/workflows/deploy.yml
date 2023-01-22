@@ -13,14 +13,17 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
-      - name: Setup yarn
-      - uses: mskelton/setup-yarn@v1
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16
 
       - name: Install dependencies
-      - uses: egordm/gha-yarn-node-cache@v1
+        uses: bahmutov/npm-install@v1
 
       - name: Build project
-        run: yarn build
+        run: npm run build
 
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v2
