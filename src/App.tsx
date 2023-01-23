@@ -10,7 +10,7 @@ export default function App() {
   // breaks for any new line and colorizes the chat
   function formatChatlog(chatlog: string) {
     // string return after new line inside a map
-    chatlog.split("\n").map((str) => {
+    return chatlog.split("\n").map((str) => {
       // switch case where if char "*" = true, we colorize
       switch (str) {
         // radio (primary slot)
