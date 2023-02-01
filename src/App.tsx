@@ -1,4 +1,4 @@
-import HandleChatlog from './Components/chatlogHandler';
+import HandleChatlog from './Components/HandleChatlog';
 
 export default function App() {
   return (
