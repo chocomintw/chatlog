@@ -21,6 +21,9 @@ export default function HandleChatlog() {
         case str.toUpperCase().includes('| CH:') ? str : '':
           return <div className="outputChatlog radioSecondary">{str}</div>;
 
+        case str.startsWith('((') ? str : '':
+          return <div className="outputChatlog ooc">{str}</div>;
+
         // /me
         case str.startsWith('*') || str.startsWith('>') ? str : '':
           return <div className="outputChatlog me">{str}</div>;
