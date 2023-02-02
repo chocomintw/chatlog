@@ -34,8 +34,12 @@ body {
   color: #ec3c92;
 }
 
-.radio {
+.radioPrimary {
   color: #ffec8b;
+}
+
+.radioSecondary {
+  color: #b0a360;
 }
 
 .dep {

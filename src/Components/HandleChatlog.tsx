@@ -14,8 +14,12 @@ export default function HandleChatlog() {
       // switch case where if char "*" = true, we colorize
       switch (str) {
         // radio (primary slot)
+        case str.toUpperCase().includes('S: 1 | CH:') ? str : '':
+          return <div className="outputChatlog radioPrimary">{str}</div>;
+
+        // radio (secondary slot)
         case str.toUpperCase().includes('| CH:') ? str : '':
-          return <div className="outputChatlog radio">{str}</div>;
+          return <div className="outputChatlog radioSecondary">{str}</div>;
 
         // /me
         case str.startsWith('*') || str.startsWith('>') ? str : '':
