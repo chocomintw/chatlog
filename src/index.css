@@ -34,6 +34,14 @@ body {
   color: #ec3c92;
 }
 
+.atcController {
+  color: #ff9e00;
+}
+
+.vts {
+  color: #14becd;
+}
+
 .radioPrimary {
   color: #ffec8b;
 }
@@ -47,7 +55,7 @@ body {
 }
 
 .money {
-  color: #008000;
+  color: #32cd32;
 }
 
 .give {

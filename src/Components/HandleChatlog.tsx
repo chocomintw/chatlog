@@ -40,12 +40,23 @@ export default function HandleChatlog() {
         case str.toUpperCase().startsWith('[CH: ATC]') ? str : '':
           return <div className="outputChatlog atc">{str}</div>;
 
+        // atc controller
+        case str.toUpperCase().startsWith('[CH: ATC - AIR TRAFFIC CONTROLLER]')
+          ? str
+          : '':
+          return <div className="outputChatlog atcController">{str}</div>;
+
+        // vts
+        case str.toUpperCase().startsWith('[CH: VTS') ? str : '':
+          return <div className="outputChatlog vts">{str}</div>;
+
         // dep
         case str.includes('->') ? str : '':
           return <div className="outputChatlog dep">{str}</div>;
 
         // money
-        case str.includes('paid you $') || str.includes('you paid $')
+        case str.toLowerCase().includes('paid you $') ||
+        str.toLowerCase().includes('you paid $')
           ? str
           : '':
           return <div className="outputChatlog money">{str}</div>;
