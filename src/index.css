@@ -66,6 +66,14 @@ body {
   color: #696969;
 }
 
+.ckBlue {
+  color: #1e90ff;
+}
+
+.ckRed {
+  color: #ff0000;
+}
+
 #chatlog {
   width: fit-content;
 }

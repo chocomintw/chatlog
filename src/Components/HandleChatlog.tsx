@@ -77,6 +77,18 @@ export default function HandleChatlog() {
           : '':
           return <div className="outputChatlog give">{str}</div>;
 
+        // TODO: character kill
+        case str.startsWith('[Character kill]') ? str: '':
+          const newStr = str.split(" ")
+
+          return <>
+            <div className='outputChatlog'>
+              <span className='ckBlue'>{"[Character kill] "}</span>
+              <span className='outputChatlog ckRed'>{newStr[2]} {newStr[3]} {newStr[4]} {newStr[5]} {newStr[6]}</span>
+            </div>
+          </>
+
+
         // default message in chat
         default:
           return <div className="outputChatlog">{str}</div>;
