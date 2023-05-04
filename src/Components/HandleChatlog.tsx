@@ -12,7 +12,8 @@ export default function HandleChatlog() {
   function handleSaveClick() {
     const node = document.getElementById("chatlog") as HTMLElement;
     domtoimage.toBlob(node).then(function(blob) {
-      fileDownload(blob, "chatlog.png");
+      fileDownload(blob, new Date().toLocaleString().replaceAll(",", "_").replaceAll(" ", "_")
+                                   .replaceAll("/", "-").replace("__", "_").replaceAll(":", "-") + "_" + "chatlog.png");
     });
   }
 
@@ -91,7 +92,7 @@ export default function HandleChatlog() {
       />
       <div id="chatlog">{formatChatlog(chatlog)}</div>
 
-      <button onClick={handleSaveClick}>hello</button>
+      <button onClick={handleSaveClick}>Download Image</button>
     </div>
   );
 }
