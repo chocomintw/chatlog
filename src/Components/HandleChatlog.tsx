@@ -1,10 +1,19 @@
 import { useState } from 'react';
+import domtoimage from 'dom-to-image';
+import fileDownload from "js-file-download";
 
 export default function HandleChatlog() {
   const [chatlog, setChatlog] = useState('');
 
   function stateChatlog(chatlog: string): void {
     return setChatlog(chatlog);
+  }
+
+  function handleSaveClick() {
+    const node = document.getElementById("chatlog") as HTMLElement;
+    domtoimage.toBlob(node).then(function(blob) {
+      fileDownload(blob, "chatlog.png");
+    });
   }
 
   // breaks for any new line and colorizes the chat
@@ -80,7 +89,9 @@ export default function HandleChatlog() {
         value={chatlog}
         onChange={(e) => stateChatlog(e.target.value)}
       />
-      {formatChatlog(chatlog)}
+      <div id="chatlog">{formatChatlog(chatlog)}</div>
+
+      <button onClick={handleSaveClick}>hello</button>
     </div>
   );
 }
