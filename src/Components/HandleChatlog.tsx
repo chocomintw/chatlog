@@ -100,7 +100,6 @@ export default function HandleChatlog() {
         onChange={(e) => stateChatlog(e.target.value)}
       />
       <div id="chatlog">{formatChatlog(chatlog)}</div>
-
       <button onClick={handleSaveClick}>Download Image</button>
     </div>
   );
