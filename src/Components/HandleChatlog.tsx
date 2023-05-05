@@ -39,7 +39,7 @@ export default function HandleChatlog() {
           return <div className="outputChatlog me">{str}</div>;
 
         // [low]
-        case str.toLowerCase().includes('says [low]:') ? str : '':
+        case str.toLowerCase().includes('says [low]') ? str : '':
           return <div className="outputChatlog low">{str}</div>;
 
         // whispers
