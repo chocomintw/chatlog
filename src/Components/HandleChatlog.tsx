@@ -2,6 +2,7 @@ import { useState } from 'react';
 import domtoimage from 'dom-to-image';
 import fileDownload from "js-file-download";
 
+
 export default function HandleChatlog() {
   const [chatlog, setChatlog] = useState('');
   const [fontsize, setFontsize] = useState(15)
@@ -10,11 +11,12 @@ export default function HandleChatlog() {
     return setChatlog(chatlog);
   }
 
-  function handleSaveClick() {
+  function handleSaveClick(): void {
     const node = document.getElementById("chatlog") as HTMLElement;
-    domtoimage.toBlob(node).then(function(blob) {
-      fileDownload(blob, new Date().toLocaleString().replaceAll(",", "_").replaceAll(" ", "_")
-                                   .replaceAll("/", "-").replace("__", "_").replaceAll(":", "-") + "_" + "chatlog.png");
+    domtoimage.toBlob(node)
+              .then(function(blob) {
+                fileDownload(blob, new Date().toLocaleString().replaceAll(",", "_").replaceAll(" ", "_")
+                                             .replaceAll("/", "-").replace("__", "_").replaceAll(":", "-") + "_" + "chatlog.png");
     });
   }
 
@@ -36,8 +38,29 @@ export default function HandleChatlog() {
             fontSize: `${fontsize}px`
           }}>{str}</div>;
 
+        // ooc
         case str.startsWith('((') ? str : '':
           return <div className="outputChatlog ooc" style={{
+            fontSize: `${fontsize}px`
+          }}>{str}</div>;
+
+        // atc radio
+        case str.toUpperCase().startsWith('** [CH: ATC]') ? str : '':
+          return <div className="outputChatlog atc" style={{
+            fontSize: `${fontsize}px`
+          }}>{str}</div>;
+        
+        // atc controller
+        case str.toUpperCase().startsWith('** [CH: ATC - AIR TRAFFIC CONTROLLER]')
+          ? str
+          : '':
+          return <div className="outputChatlog atcController" style={{
+            fontSize: `${fontsize}px`
+          }}>{str}</div>;
+        
+      // vts
+        case str.toUpperCase().startsWith('** [CH: VTS') ? str : '':
+          return <div className="outputChatlog vts" style={{
             fontSize: `${fontsize}px`
           }}>{str}</div>;
 
@@ -59,25 +82,7 @@ export default function HandleChatlog() {
             fontSize: `${fontsize}px`
           }}>{str}</div>;
 
-        // atc radio
-        case str.toUpperCase().startsWith('[CH: ATC]') ? str : '':
-          return <div className="outputChatlog atc" style={{
-            fontSize: `${fontsize}px`
-          }}>{str}</div>;
 
-        // atc controller
-        case str.toUpperCase().startsWith('[CH: ATC - AIR TRAFFIC CONTROLLER]')
-          ? str
-          : '':
-          return <div className="outputChatlog atcController" style={{
-            fontSize: `${fontsize}px`
-          }}>{str}</div>;
-
-        // vts
-        case str.toUpperCase().startsWith('[CH: VTS') ? str : '':
-          return <div className="outputChatlog vts" style={{
-            fontSize: `${fontsize}px`
-          }}>{str}</div>;
 
         // dep
         case str.includes('->') ? str : '':
@@ -102,8 +107,8 @@ export default function HandleChatlog() {
             fontSize: `${fontsize}px`
           }}>{str}</div>;
 
+        // CK
         case str.startsWith('[Character kill]') ? str: '':
-          const newStr = str.split(" ")
           return <>
             <div className='outputChatlog'>
               <span className='ckBlue' style={{
@@ -111,7 +116,24 @@ export default function HandleChatlog() {
           }}>{"[Character kill] "}</span>
               <span className='outputChatlog ckRed' style={{
             fontSize: `${fontsize}px`
-          }}>{newStr[2]} {newStr[3]} {newStr[4]} {newStr[5]} {newStr[6]}</span>
+          }}>{str.slice(17)}</span>
+            </div>
+          </>
+
+        // marker
+        case str.startsWith('[INFO]: ') ? str: '':
+          const infoStr = str.split(' ')
+          return <>
+            <div className='outputChatlog'>
+              <span className='infoBlue' style={{fontSize: `${fontsize}px`}}>
+                {"[INFO]: "}
+              </span>
+              <span className='infoOrange' style={{fontSize: `${fontsize}px`}}>
+                {`${infoStr[1]} `}
+              </span>
+              <span style={{fontSize: `${fontsize}px`}}>
+                {str.slice(22)}
+              </span>
             </div>
           </>
 
@@ -135,6 +157,7 @@ export default function HandleChatlog() {
 
       <button onClick={() => {setFontsize(fontsize + 1)}}>+</button>
       <button onClick={() => {setFontsize(fontsize - 1)}}>-</button>
+      <button onClick={() => {setFontsize(15)}}>reset</button>
       {fontsize}px
     </div>
   );

@@ -18,62 +18,6 @@ body {
   letter-spacing: 0;
 }
 
-.me {
-  color: #c2a2da;
-}
-
-.low {
-  color: #bbb;
-}
-
-.whisper {
-  color: #eda841;
-}
-
-.atc {
-  color: #ec3c92;
-}
-
-.atcController {
-  color: #ff9e00;
-}
-
-.vts {
-  color: #14becd;
-}
-
-.radioPrimary {
-  color: #ffec8b;
-}
-
-.radioSecondary {
-  color: #b0a360;
-}
-
-.dep {
-  color: #e3e117;
-}
-
-.money {
-  color: #32cd32;
-}
-
-.give {
-  color: #56d64b;
-}
-
-.ooc {
-  color: #696969;
-}
-
-.ckBlue {
-  color: #1e90ff;
-}
-
-.ckRed {
-  color: #ff0000;
-}
-
 #chatlog {
   width: fit-content;
 }
