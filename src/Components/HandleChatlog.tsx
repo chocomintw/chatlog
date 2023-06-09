@@ -111,12 +111,12 @@ export default function HandleChatlog() {
         case str.startsWith('[Character kill]') ? str: '':
           return <>
             <div className='outputChatlog'>
-              <span className='ckBlue' style={{
-            fontSize: `${fontsize}px`
-          }}>{"[Character kill] "}</span>
-              <span className='outputChatlog ckRed' style={{
-            fontSize: `${fontsize}px`
-          }}>{str.slice(17)}</span>
+              <span className='ckBlue' style={{fontSize: `${fontsize}px`}}>
+                {"[Character kill] "}
+              </span>
+              <span className='outputChatlog ckRed' style={{fontSize: `${fontsize}px`}}>
+                {str.slice(17)}
+              </span>
             </div>
           </>
 
@@ -137,6 +137,11 @@ export default function HandleChatlog() {
             </div>
           </>
 
+        case str.startsWith('You have extended') ? str : '':
+          return <div className="outputChatlog extendedJail" style={{
+            fontSize: `${fontsize}px`
+            }}>{str}</div>;
+
         // default message in chat
         default:
           return <div className="outputChatlog" style={{
@@ -147,18 +152,31 @@ export default function HandleChatlog() {
   }
 
   return (
-    <div>
-      <textarea
-        value={chatlog}
-        onChange={(e) => stateChatlog(e.target.value)}
-      />
-      <div id="chatlog">{formatChatlog(chatlog)}</div>
-      <button onClick={handleSaveClick}>Download Image</button>
+    <>
+      <div className='flex flex-col'>
+        <div className="w-auto inline-block m-0 p-0" id="chatlog">{formatChatlog(chatlog)}</div>
+        <textarea
+          value={chatlog}
+          onChange={(e) => stateChatlog(e.target.value)}
+        />
+      </div>
+      <button className='inline-flex items-center w-full px-5 py-3 mb-3 mr-1 text-base font-semibold text-white no-underline align-middle bg-blue-600 border border-transparent border-solid rounded-md cursor-pointer select-none sm:mb-0 sm:w-auto hover:bg-blue-700 hover:border-blue-700 hover:text-white focus-within:bg-blue-700 focus-within:border-blue-700' onClick={handleSaveClick}>Download Image</button>
 
-      <button onClick={() => {setFontsize(fontsize + 1)}}>+</button>
-      <button onClick={() => {setFontsize(fontsize - 1)}}>-</button>
-      <button onClick={() => {setFontsize(15)}}>reset</button>
+      <button className='inline-flex items-center w-full px-5 py-3 mb-3 mr-1 text-base font-semibold text-white no-underline align-middle bg-blue-600 border border-transparent border-solid rounded-md cursor-pointer select-none sm:mb-0 sm:w-auto hover:bg-blue-700 hover:border-blue-700 hover:text-white focus-within:bg-blue-700 focus-within:border-blue-700' onClick={() => {setFontsize(fontsize + 1)}}>+</button>
+      <button className='inline-flex items-center w-full px-5 py-3 mb-3 mr-1 text-base font-semibold text-white no-underline align-middle bg-blue-600 border border-transparent border-solid rounded-md cursor-pointer select-none sm:mb-0 sm:w-auto hover:bg-blue-700 hover:border-blue-700 hover:text-white focus-within:bg-blue-700 focus-within:border-blue-700' onClick={() => {setFontsize(fontsize - 1)}}>-</button>
+      <button className='inline-flex items-center w-full px-5 py-3 mb-3 mr-1 text-base font-semibold text-white no-underline align-middle bg-blue-600 border border-transparent border-solid rounded-md cursor-pointer select-none sm:mb-0 sm:w-auto hover:bg-blue-700 hover:border-blue-700 hover:text-white focus-within:bg-blue-700 focus-within:border-blue-700' onClick={() => {setFontsize(15)}}>reset</button>
       {fontsize}px
-    </div>
+    </>
+    
+    
   );
 }
+
+
+/**
+ * 
+ * <a href="#_" class="inline-flex items-center w-full px-5 py-3 mb-3 mr-1 text-base font-semibold text-white no-underline align-middle bg-blue-600 border border-transparent border-solid rounded-md cursor-pointer select-none sm:mb-0 sm:w-auto hover:bg-blue-700 hover:border-blue-700 hover:text-white focus-within:bg-blue-700 focus-within:border-blue-700">
+Button Text
+<svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+</a>
+ */
