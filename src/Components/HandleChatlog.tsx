@@ -142,6 +142,12 @@ export default function HandleChatlog() {
             fontSize: `${fontsize}px`
             }}>{str}</div>;
 
+        // megaphone
+        case str.toLowerCase().includes('[Megaphone]') ? str : '':
+          return <div className="outputChatlog megaphone" style={{
+            fontSize: `${fontsize}px`
+          }}>{str}</div>;
+
         // default message in chat
         default:
           return <div className="outputChatlog" style={{
