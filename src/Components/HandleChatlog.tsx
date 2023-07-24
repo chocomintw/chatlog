@@ -143,7 +143,7 @@ export default function HandleChatlog() {
             }}>{str}</div>;
 
         // megaphone
-        case str.startsWith('[Megaphone]') ? str : '':
+        case str.toLowerCase().includes('[megaphone]:') ? str : '':
           return <div className="outputChatlog megaphone" style={{
             fontSize: `${fontsize}px`
           }}>{str}</div>;
