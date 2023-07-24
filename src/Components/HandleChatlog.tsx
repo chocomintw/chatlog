@@ -82,8 +82,6 @@ export default function HandleChatlog() {
             fontSize: `${fontsize}px`
           }}>{str}</div>;
 
-
-
         // dep
         case str.includes('->') ? str : '':
           return <div className="outputChatlog dep" style={{
