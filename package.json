@@ -2,6 +2,7 @@
   "name": "chatlog",
   "version": "2.0.0",
   "private": true,
+  "packageManager": "pnpm@10.27.0",
   "type": "module",
   "scripts": {
     "dev": "next dev",
