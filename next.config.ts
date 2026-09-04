@@ -2,7 +2,7 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   output: 'export',
-  basePath: '/chatlog',
+  basePath: process.env.NODE_ENV === 'production' ? '/chatlog' : undefined,
   images: {
     unoptimized: true,
   },

@@ -1,39 +1,20 @@
 'use client';
 
-import { useRef } from 'react';
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
 import { ChatlogPreview } from './chatlog-preview';
 import { ChatlogInput } from './chatlog-input';
-import { EditorToolbar } from './editor-toolbar';
 
 export function ChatlogEditor() {
-  const previewRef = useRef<HTMLDivElement>(null);
-
   return (
-    <div className="space-y-6">
-      <Card>
-        <CardHeader>
-          <CardTitle>Preview</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <ChatlogPreview ref={previewRef} />
-        </CardContent>
-      </Card>
+    <div className="space-y-4">
+      {/* Live Preview Canvas Card with attached Canvas Toolbar & Detected Types */}
+      <section aria-label="Screenshot preview">
+        <ChatlogPreview />
+      </section>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Controls</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <EditorToolbar previewRef={previewRef} />
-          <ChatlogInput />
-        </CardContent>
-      </Card>
+      {/* Chatlog Source Card with attached Character Bar, Actions, and Textarea */}
+      <section aria-label="Chatlog text input">
+        <ChatlogInput />
+      </section>
     </div>
   );
 }
