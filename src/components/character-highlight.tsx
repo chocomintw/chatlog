@@ -77,7 +77,7 @@ export function CharacterHighlight() {
                     variant="ghost"
                     size="icon"
                     onClick={() => addSavedCharacter(characterName.trim())}
-                    className="h-6 w-6 text-muted-foreground hover:text-foreground"
+                    className="h-7 w-7 text-muted-foreground hover:text-foreground"
                     aria-label="Save character name"
                   >
                     <Plus className="h-3 w-3" />
@@ -95,7 +95,7 @@ export function CharacterHighlight() {
                     variant="ghost"
                     size="icon"
                     onClick={() => setCharacterName('')}
-                    className="h-6 w-6 text-muted-foreground hover:text-foreground"
+                    className="h-7 w-7 text-muted-foreground hover:text-foreground"
                     aria-label="Clear character name"
                   >
                     <X className="h-3 w-3" />
@@ -139,7 +139,7 @@ export function CharacterHighlight() {
           {savedCharacters.length === 0 ? (
             <div className="py-3 text-center text-muted-foreground">
               <p className="text-[11px]">No saved characters.</p>
-              <p className="text-[10px] text-muted-foreground/70">
+              <p className="text-[10px] text-muted-foreground">
                 Type a name and click + or press Enter to bookmark it.
               </p>
             </div>
@@ -174,7 +174,7 @@ export function CharacterHighlight() {
                         e.stopPropagation();
                         removeSavedCharacter(name);
                       }}
-                      className="ml-1 p-0.5 text-muted-foreground/70 hover:text-destructive transition-colors"
+                      className="ml-1 p-0.5 text-muted-foreground hover:text-destructive transition-colors"
                       aria-label={`Remove ${name}`}
                     >
                       <X className="h-3 w-3" />

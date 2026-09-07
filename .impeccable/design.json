@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-07T00:00:00.000Z",
+  "title": "Design System: Chatlog Editor",
+  "extensions": {
+    "colorMeta": {
+      "ui-primary": { "role": "primary", "displayName": "Bright Primary", "canonical": "hsl(0 0% 98%)" },
+      "ui-background": { "role": "neutral", "displayName": "Terminal Black", "canonical": "hsl(240 5% 7%)" },
+      "ui-card": { "role": "neutral", "displayName": "Panel", "canonical": "hsl(240 5% 10%)" },
+      "ui-muted-foreground": { "role": "neutral", "displayName": "Quiet Text", "canonical": "hsl(240 4% 60%)" },
+      "chat-death": { "role": "content", "displayName": "Damage Red", "canonical": "#F00000" },
+      "chat-green": { "role": "content", "displayName": "Success Green", "canonical": "#56D64B" },
+      "chat-blue": { "role": "content", "displayName": "Info Blue", "canonical": "#3896F3" },
+      "chat-toyou": { "role": "content", "displayName": "Directed-At-You Magenta", "canonical": "#FF00BC" }
+    },
+    "typographyMeta": {
+      "chat-line": { "displayName": "Chat Line", "purpose": "Authentic in-game chat text: bold, outlined, no anti-aliasing. Never used for chrome." },
+      "ui-body": { "displayName": "Body", "purpose": "Default chrome text." }
+    },
+    "shadows": [
+      { "name": "panel", "value": "0 1px 2px 0 rgb(0 0 0 / 0.05)", "purpose": "The two main cards (Preview, Input) only." },
+      { "name": "overlay", "value": "0 4px 6px -1px rgb(0 0 0 / 0.1)", "purpose": "Radix Popover/Tooltip content floating above the flat page." }
+    ],
+    "motion": [
+      { "name": "copy-feedback", "value": "opacity/scale spring via motion/react, ~150-200ms", "purpose": "Copy Image button state swap (Copy -> Copying -> Copied)." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Highest-intent action per view (Download PNG).",
+      "html": "<button class=\"ds-btn-primary\">Download PNG</button>",
+      "css": ".ds-btn-primary { background: hsl(0 0% 98%); color: hsl(240 5% 10%); padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.875rem; font-weight: 500; border: none; transition: background 0.15s; } .ds-btn-primary:hover { background: hsl(0 0% 98% / 0.9); } .ds-btn-primary:focus-visible { outline: 1px solid hsl(240 4% 80%); outline-offset: 2px; }"
+    },
+    {
+      "name": "Outline/Ghost Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Default toolbar action (Copy Image, Clear, Sample Log, icon buttons).",
+      "html": "<button class=\"ds-btn-outline\">Copy Image</button>",
+      "css": ".ds-btn-outline { background: transparent; color: hsl(0 0% 95%); padding: 0.5rem 1rem; border-radius: 6px; border: 1px solid hsl(240 4% 16%); font-size: 0.875rem; font-weight: 500; transition: background 0.15s; } .ds-btn-outline:hover { background: hsl(240 4% 18%); } .ds-btn-outline:focus-visible { outline: 1px solid hsl(240 4% 80%); outline-offset: 2px; }"
+    },
+    {
+      "name": "Panel Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "The Preview and Input panel shell: three horizontal bands (toolbar / content / footer).",
+      "html": "<div class=\"ds-card\"><div class=\"ds-card-band\">Toolbar</div><div class=\"ds-card-content\">Content</div><div class=\"ds-card-band\">Footer</div></div>",
+      "css": ".ds-card { background: hsl(240 5% 10%); color: hsl(0 0% 95%); border: 1px solid hsl(240 4% 16%); border-radius: 12px; box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05); overflow: hidden; } .ds-card-band { background: hsl(240 4% 15% / 0.4); padding: 0.625rem 0.875rem; font-size: 0.75rem; } .ds-card-content { padding: 1rem; }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Standard text field, e.g. the character-name input.",
+      "html": "<input class=\"ds-input\" placeholder=\"Your character's name...\" />",
+      "css": ".ds-input { background: transparent; color: hsl(0 0% 95%); border: 1px solid hsl(240 4% 16%); border-radius: 6px; height: 32px; padding: 0 0.75rem; font-size: 0.75rem; } .ds-input:focus-visible { outline: none; box-shadow: 0 0 0 1px hsl(240 4% 80%); } .ds-input::placeholder { color: hsl(240 4% 60% / 0.6); }"
+    },
+    {
+      "name": "Chat Line",
+      "kind": "custom",
+      "refersTo": "chat-line",
+      "description": "Signature component: authentic in-game chat text, multi-span colored per matched rule.",
+      "html": "<div class=\"ds-chatline\"><span style=\"color:#3896F3\">[INFO] </span><span style=\"color:#FFFFFF\">Dispatch reported a suspicious vehicle.</span></div>",
+      "css": ".ds-chatline { -webkit-font-smoothing: none; font-weight: 700; letter-spacing: 0; line-height: 1.32; word-break: break-word; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; font-size: 15px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Authentic Terminal",
+    "overview": "The app is deliberately two visual worlds sharing one screen. The tool chrome — cards, toolbars, buttons, sliders — is a quiet, dark-first, near-monochrome utility surface built from a standard shadcn/Radix component set on tight HSL neutrals. It has almost no personality of its own on purpose: its job is to disappear so the second world reads clearly. The second world is the chat canvas itself: bold, saturated, high-contrast text reproducing GTA World's actual in-game chat colors and rendering quirks. This is the product's real payload, and it is intentionally exempt from the app's own design-token discipline.",
+    "keyCharacteristics": [
+      "Dark-mode-first neutral shell with light mode as a fully supported secondary variant.",
+      "Two independent color systems: app chrome tokens vs. the in-game chat palette.",
+      "Three-band card composition (toolbar / content / footer) repeated across every panel.",
+      "Minimal elevation — borders and muted-background strips do the separating work, not shadows."
+    ],
+    "rules": [
+      { "name": "The Two-Palette Rule", "body": "Chrome colors and chat colors never cross. Chrome always resolves through globals.css HSL variables; chat text always resolves through chat-colors.ts hex values.", "section": "colors" },
+      { "name": "The Outline-Not-Shadow Rule", "body": "The chat line's text-shadow is a hard 1px outline in four cardinal directions, not a soft drop shadow. Never soften it into a blur.", "section": "typography" },
+      { "name": "The Band-Not-Box Rule", "body": "Structure within a panel is shown by alternating background wash and hairline borders between horizontal bands, never by nesting additional bordered/shadowed boxes inside a card.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do keep chat-line colors resolving only through chat-colors.ts, regardless of the active app theme.",
+      "Do build any new panel from the toolbar/content/footer three-band pattern already used by Preview and Input.",
+      "Do pair every icon-only control with both an aria-label and a Tooltip.",
+      "Do use rounded-full exclusively for color-swatch/selector affordances, never for general buttons."
+    ],
+    "donts": [
+      "Don't apply /70-/80 opacity modifiers to text-muted-foreground for body copy.",
+      "Don't size interactive controls below 24x24px; treat 44x44px as the real target on touch.",
+      "Don't introduce hardcoded Tailwind palette colors outside small inline icon accents.",
+      "Don't let the chat canvas inherit theme-aware styling."
+    ]
+  }
+}

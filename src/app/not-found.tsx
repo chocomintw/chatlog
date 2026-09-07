@@ -2,7 +2,7 @@ export default function NotFound() {
   return (
     <div className="flex min-h-screen items-center justify-center">
       <div className="text-center">
-        <h2 className="text-2xl font-bold">Not Found</h2>
+        <h1 className="text-2xl font-bold">Not Found</h1>
         <p className="mt-2 text-muted-foreground">
           The page you&apos;re looking for doesn&apos;t exist.
         </p>

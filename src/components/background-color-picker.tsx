@@ -40,7 +40,7 @@ export function BackgroundColorPicker() {
                   type="button"
                   onClick={() => setBackgroundColor(preset.value)}
                   className={cn(
-                    'h-5 w-5 rounded-full border border-border transition-transform active:scale-95',
+                    'h-6 w-6 rounded-full border border-border transition-transform active:scale-95',
                     !isTransparent && backgroundColor.toLowerCase() === preset.value.toLowerCase() &&
                       'ring-2 ring-foreground ring-offset-1 ring-offset-background',
                   )}
@@ -94,7 +94,7 @@ export function BackgroundColorPicker() {
               size="icon"
               aria-label="Reset background color to default"
               onClick={resetBackgroundColor}
-              className="h-7 w-7 text-muted-foreground hover:text-foreground"
+              className="h-8 w-8 text-muted-foreground hover:text-foreground"
             >
               <RotateCcw className="h-3.5 w-3.5" />
             </Button>

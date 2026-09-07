@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { toBlob, toPng } from 'html-to-image';
 import { saveAs } from 'file-saver';
 import {
@@ -33,6 +33,8 @@ export function CanvasExportButtons({ previewRef, disabled = false }: CanvasExpo
   const [copied, setCopied] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
   const [exportType, setExportType] = useState<'download' | 'copy' | null>(null);
+  const [statusMessage, setStatusMessage] = useState('');
+  const shouldReduceMotion = useReducedMotion();
 
   const handleDownload = useCallback(async () => {
     if (!previewRef.current || isExporting || disabled) return;
@@ -49,8 +51,10 @@ export function CanvasExportButtons({ previewRef, disabled = false }: CanvasExpo
         .replace('__', '_')
         .replaceAll(':', '-');
       saveAs(dataUrl, `${timestamp}_chatlog.png`);
+      setStatusMessage('Image downloaded');
     } catch (error) {
       console.error('Failed to export image:', error);
+      setStatusMessage('Image download failed');
     } finally {
       setIsExporting(false);
       setExportType(null);
@@ -69,9 +73,11 @@ export function CanvasExportButtons({ previewRef, disabled = false }: CanvasExpo
         new ClipboardItem({ 'image/png': blob }),
       ]);
       setCopied(true);
+      setStatusMessage('Image copied to clipboard');
       setTimeout(() => setCopied(false), 2000);
     } catch (error) {
       console.error('Failed to copy image:', error);
+      setStatusMessage('Image copy failed');
     } finally {
       setIsExporting(false);
       setExportType(null);
@@ -80,6 +86,9 @@ export function CanvasExportButtons({ previewRef, disabled = false }: CanvasExpo
 
   return (
     <div className="flex items-center gap-2">
+      <span role="status" aria-live="polite" className="sr-only">
+        {statusMessage}
+      </span>
       <Button
         type="button"
         variant="outline"
@@ -96,9 +105,10 @@ export function CanvasExportButtons({ previewRef, disabled = false }: CanvasExpo
           ) : copied ? (
             <motion.span
               key="copied"
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
+              exit={shouldReduceMotion ? undefined : { opacity: 0 }}
+              transition={shouldReduceMotion ? { duration: 0 } : undefined}
               className="flex items-center gap-1.5 font-semibold text-emerald-600 dark:text-emerald-400"
             >
               <Check className="h-3.5 w-3.5" />
@@ -156,7 +166,7 @@ export function EditorToolbar() {
           size="icon"
           aria-label="Decrease font size"
           onClick={decrementFontSize}
-          className="h-7 w-7 rounded"
+          className="h-8 w-8 rounded"
         >
           <Minus className="h-3 w-3" />
         </Button>
@@ -177,7 +187,7 @@ export function EditorToolbar() {
           size="icon"
           aria-label="Increase font size"
           onClick={incrementFontSize}
-          className="h-7 w-7 rounded"
+          className="h-8 w-8 rounded"
         >
           <Plus className="h-3 w-3" />
         </Button>
@@ -194,7 +204,7 @@ export function EditorToolbar() {
               size="icon"
               aria-label="Reset font size"
               onClick={resetFontSize}
-              className="h-7 w-7 text-muted-foreground hover:text-foreground"
+              className="h-8 w-8 text-muted-foreground hover:text-foreground"
             >
               <RotateCcw className="h-3 w-3" />
             </Button>

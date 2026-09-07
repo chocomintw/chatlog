@@ -6,6 +6,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { useChatlogStore } from '@/store/chatlog-store';
 import { SAMPLE_GTA_CHATLOG } from '@/lib/sample-logs';
 import { CharacterHighlight } from './character-highlight';
+import { DetectedTypes } from './detected-types';
 
 export function ChatlogInput() {
   const rawText = useChatlogStore((s) => s.rawText);
@@ -57,25 +58,31 @@ export function ChatlogInput() {
       </div>
 
       {/* Textarea Area */}
+      <label htmlFor="chatlog-textarea" className="sr-only">
+        Chatlog text
+      </label>
       <Textarea
         id="chatlog-textarea"
         value={rawText}
         onChange={(e) => setRawText(e.target.value)}
         placeholder="Paste your GTA RP chatlog lines here..."
-        className="min-h-[160px] resize-y rounded-none border-0 bg-transparent p-3.5 font-mono text-xs leading-relaxed focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-muted-foreground/60"
+        className="min-h-[160px] resize-y rounded-none border-0 bg-transparent p-3.5 font-mono text-xs leading-relaxed focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-muted-foreground"
         spellCheck={false}
       />
 
-      {/* Input Footer: Stats & Active Character Status */}
-      <div className="flex items-center justify-between border-t border-border/70 bg-muted/20 px-3.5 py-1.5 text-[11px] text-muted-foreground">
-        <span>
-          {linesCount} {linesCount === 1 ? 'line' : 'lines'} • {rawText.length.toLocaleString()} characters
-        </span>
-        {characterName && characterColoringEnabled && (
-          <span className="font-medium text-foreground/80">
-            Highlighting: <span className="font-semibold text-primary">{characterName}</span>
+      {/* Input Footer: Stats, Detected Rules & Active Character Status */}
+      <div className="flex flex-col gap-1.5 border-t border-border/70 bg-muted/20 px-3.5 py-1.5">
+        <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-[11px] text-muted-foreground">
+          <span>
+            {linesCount} {linesCount === 1 ? 'line' : 'lines'} • {rawText.length.toLocaleString()} characters
           </span>
-        )}
+          {characterName && characterColoringEnabled && (
+            <span className="font-medium text-foreground/80">
+              Highlighting: <span className="font-semibold text-primary">{characterName}</span>
+            </span>
+          )}
+        </div>
+        <DetectedTypes />
       </div>
     </div>
   );

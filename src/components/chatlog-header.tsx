@@ -23,7 +23,7 @@ export function ChatlogHeader() {
           GTA RP screenshot exporter
         </span>
         {lineCount > 0 && (
-          <span className="text-xs text-muted-foreground/80 font-mono">
+          <span className="text-xs text-muted-foreground font-mono">
             ({lineCount} {lineCount === 1 ? 'line' : 'lines'})
           </span>
         )}
